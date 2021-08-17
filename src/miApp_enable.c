@@ -6,12 +6,15 @@
  */
 
 #include "miApp_enable.h"
+
 typedef struct __attribute__((__packed__))
 {
 	gpioMap_t gpio;
 	bool_t enable;
 }activador;
+
 activador act_array[lastActivador];
+
 static bool_t inicializado = false;
 
 bool_t miApp_activador_set(activador_t activador , bool_t value){

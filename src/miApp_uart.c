@@ -18,22 +18,38 @@ bool_t bt_3 = false;
 bool_t bt_4 = false;
 #define clrscr() printf("\e[1;1H\e[2J")
 delay_t myDelay;
+
+/**
+ * @brief Print of the main menu of battery charger.
+ * 
+ */
+static void miApp_uart_menu();
+/**
+ * @brief Print of the charger's configuration menu.
+ * 
+ */
+static void miApp_uart_submenu();
+/**
+ * @brief Print of the battery's monitoring menu.
+ * 
+ */
+static void miApp_uart_submenu2();
+
 void miApp_uart_init(){
 	delayConfig( &myDelay, 500 );
 }
 
-void miApp_uart_menu(){
+static void miApp_uart_menu(){
 	clrscr();
 	printf("            CARGADOR DE BATERIA \n\r");
 	printf("------------------------------------------\n\r");
 	printf("a. Configurador de Cargadores.\n\r");
 	printf("b. Monitor de Baterias.\n\r");
-	printf("c. Save and quit.\n\r");
 	printf(" Please enter an option from the main menu: \n\r");
 	menu_shown = menu1;
 }
 
-void miApp_uart_submenu(){
+static void miApp_uart_submenu(){
 	clrscr();
 	printf("            Configurador de Cargadores \n\r");
 	printf("------------------------------------------\n\r");
@@ -47,7 +63,7 @@ void miApp_uart_submenu(){
 	menu_shown = menu2;
 }
 
-void miApp_uart_submenu2(){
+static void miApp_uart_submenu2(){
 	clrscr();
 	uint16_t voltaje;
 
@@ -55,14 +71,14 @@ void miApp_uart_submenu2(){
 	printf("------------------------------------------\n\r");
 	printf(" Estado del Cargador\n\r" );
 	voltaje = miApp_bateria_read(bateria1);
-	printf("1. V.Cargador 1: %d .\n\r", voltaje );
+	printf("V.Cargador 1: %d .\n\r", voltaje );
 	voltaje = miApp_bateria_read(bateria2);
-	printf("2. V.Cargador 2: %d .\n\r", voltaje);
+	printf("V.Cargador 2: %d .\n\r", voltaje);
 	voltaje = miApp_bateria_read(bateria3);
-	printf("3. V.Cargador 3: %d .\n\r", voltaje);
+	printf("V.Cargador 3: %d .\n\r", voltaje);
 	voltaje = miApp_bateria_read(bateria4);
-	printf("4. V.Cargador 4: %d .\n\r", voltaje);
-	printf("5. Save and quit.\n\r");
+	printf("V.Cargador 4: %d .\n\r", voltaje);
+	printf("1. Go Back.\n\r");
 	printf(" Please enter an option from the main menu: \n\r");
 	menu_shown = menu3;
 }
@@ -107,12 +123,18 @@ void miApp_uart_task(menu_t *opcion){
 				bt_4 ^= 1;
 				miApp_activador_set(activador4,bt_4);
 			}
+			else if('5' == menu_option){
+				*opcion = menu1;
+			}
 			break;
 		case menu3:
 			if(*opcion != menu_shown || delayRead(&myDelay)){
 				miApp_uart_submenu2();
 			}
-
+			scanf(" %c",&menu_option);
+			if('1' == menu_option){
+				*opcion = menu1;
+			}
 			break;
 
 	}
