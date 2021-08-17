@@ -24,8 +24,8 @@
  ****************************************************************************/
 
 
-bool_t miApp_main_baterias_init();
-bool_t miApp_main_activadores_init();
+bool_t miApp_main_batteries_init();
+bool_t miApp_main_activators_init();
 
 int main(void){
 	bool_t resp = false;
@@ -37,29 +37,30 @@ int main(void){
 	SysTick_Config(SystemCoreClock / TICKRATE_HZ);
 	uartConfig( UART_USB, 115200 );
 	miApp_uart_init();
-	resp = miApp_bateria_init();
-	resp &= miApp_activador_init();
-	resp &= miApp_main_baterias_init();
-	resp &= miApp_main_activadores_init();
+	resp = miApp_battery_init();
+	resp &= miApp_activator_init();
+	resp &= miApp_main_batteries_init();
+	resp &= miApp_main_activators_init();
 
-	while(1){
+	while(resp){
 		miApp_uart_task(&estado);
 			//atenderError();
 	}
+	atenderError();
 }
 
-bool_t miApp_main_baterias_init(){
-	bool_t resp = miApp_bateria_add(CH1,bateria1);
-	resp &= miApp_bateria_add(CH2,bateria2);
-	resp &= miApp_bateria_add(CH3,bateria3);
-	resp &= miApp_bateria_add(CH4,bateria4);
+bool_t miApp_main_batteries_init(){
+	bool_t resp = miApp_battery_add(CH1,battery1);
+	resp &= miApp_battery_add(CH2,battery2);
+	resp &= miApp_battery_add(CH3,battery3);
+	resp &= miApp_battery_add(CH4,battery4);
 	return(resp);
 }
-bool_t miApp_main_activadores_init(){
-	bool_t resp = miApp_activador_add(LEDR,activador1);
-	resp &= miApp_activador_add(LEDG,activador2);
-	resp &= miApp_activador_add(LED1,activador3);
-	resp &= miApp_activador_add(LEDB,activador4);
+bool_t miApp_main_activators_init(){
+	bool_t resp = miApp_activator_add(LEDR,activator1);
+	resp &= miApp_activator_add(LEDG,activator2);
+	resp &= miApp_activator_add(LED1,activator3);
+	resp &= miApp_activator_add(LEDB,activator4);
 	return(resp);
 }
 
