@@ -71,13 +71,13 @@ static void miApp_uart_submenu2(){
 	printf("------------------------------------------\n\r");
 	printf(" Estado del Cargador\n\r" );
 	voltaje = miApp_battery_read(battery1);
-	printf("V.Cargador 1: %d .\n\r", voltaje );
+	printf("V.Cargador 1: %d mV.\n\r", voltaje );
 	voltaje = miApp_battery_read(battery2);
-	printf("V.Cargador 2: %d .\n\r", voltaje);
+	printf("V.Cargador 2: %d mV.\n\r", voltaje);
 	voltaje = miApp_battery_read(battery3);
-	printf("V.Cargador 3: %d .\n\r", voltaje);
+	printf("V.Cargador 3: %d mV.\n\r", voltaje);
 	voltaje = miApp_battery_read(battery4);
-	printf("V.Cargador 4: %d .\n\r", voltaje);
+	printf("V.Cargador 4: %d mV.\n\r", voltaje);
 	printf("1. Go Back.\n\r");
 	printf(" Please enter an option from the main menu: \n\r");
 	menu_shown = menu3;
@@ -105,23 +105,23 @@ void miApp_uart_task(menu_t *opcion){
 			scanf(" %c",&menu_option);
 			if('1' == menu_option){
 				menu_shown = none;
-				bt_1 ^= 1;
 				miApp_activator_set(activator1,bt_1);
+				bt_1 ^= 1;
 			}
 			else if('2' == menu_option ){
 				menu_shown = none;
-				bt_2 ^= 1;
 				miApp_activator_set(activator2,bt_2);
+				bt_2 ^= 1;
 			}
 			else if('3' == menu_option){
 				menu_shown = none;
-				bt_3 ^= 1;
 				miApp_activator_set(activator3,bt_3);
+				bt_3 ^= 1;
 			}
 			else if('4' == menu_option ){
 				menu_shown = none;
-				bt_4 ^= 1;
 				miApp_activator_set(activator4,bt_4);
+				bt_4 ^= 1;
 			}
 			else if('5' == menu_option){
 				*opcion = menu1;

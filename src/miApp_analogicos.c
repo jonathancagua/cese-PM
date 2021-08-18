@@ -21,13 +21,14 @@ uint16_t miApp_battery_read(battery_t battery){
 	uint16_t value = 0;
 	if(lastBattery > battery){
 		value = adcRead(adc_array[battery].canal);
+		value = ((value * 3300)/1024);
 	}
 	return(value);
 }
 
 bool_t miApp_battery_add(adcMap_t canal , battery_t battery){
 	bool_t resp = false;
-	if(canal<CH1 || canal>CH3 || battery<battery1) return resp;
+	if(canal<CH1 || canal>CH4 || battery<battery1) return resp;
 	if(lastBattery > battery && !adc_array[battery].enable){
 		adc_array[battery].canal = canal;
 		adc_array[battery].enable = true;

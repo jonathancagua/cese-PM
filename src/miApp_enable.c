@@ -37,7 +37,7 @@ bool_t miApp_activator_add(gpioMap_t gpio , activator_t activator){
 		act_array[activator].enable = true;
 		resp = true;
 		gpioInit( gpio, GPIO_OUTPUT );
-		gpioWrite( gpio, 0 );
+		gpioWrite( gpio, 1 );
 	}
 	return resp;
 }
