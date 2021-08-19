@@ -6,13 +6,7 @@
  */
 #include "miApp_analogicos.h"
 
-typedef struct __attribute__((__packed__))
-{
-	adcMap_t canal;
-	bool_t enable;
-}battery;
-
-battery adc_array[lastBattery];
+static battery adc_array[lastBattery];
 
 static bool_t inicializado = false;
 

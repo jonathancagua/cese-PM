@@ -4,6 +4,12 @@
 #include <stdint.h>
 #include <string.h>
 #include "sapi.h"
+
+typedef struct __attribute__((__packed__))
+{
+	gpioMap_t gpio;
+	bool_t enable;
+}activator;
 /**
  * enum: activator_t
  * Enum with activator's id.

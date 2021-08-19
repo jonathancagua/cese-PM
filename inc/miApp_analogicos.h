@@ -4,6 +4,12 @@
 #include <string.h>
 #include "sapi.h"
 #define CH4	3U
+typedef struct __attribute__((__packed__))
+{
+	adcMap_t canal;
+	bool_t enable;
+}battery;
+
 /**
  * enum: battery_t
  * Enum with the batteries ids.

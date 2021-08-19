@@ -7,19 +7,12 @@
 
 #include "miApp_enable.h"
 
-typedef struct __attribute__((__packed__))
-{
-	gpioMap_t gpio;
-	bool_t enable;
-}activator;
-
-activator act_array[lastActivator];
+static activator act_array[lastActivator];
 
 static bool_t inicializado = false;
 
 bool_t miApp_activator_set(activator_t activator , bool_t value){
 	bool_t resp = false;
-	if(lastActivator<activator1) return resp;
 	if(lastActivator > activator){
 		gpioWrite(act_array[activator].gpio,value);
 		resp = true;

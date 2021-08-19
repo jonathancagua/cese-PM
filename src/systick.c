@@ -35,7 +35,7 @@ int main(void){
 	boardInit();
 	/* Enable and setup SysTick Timer at a periodic rate */
 	SysTick_Config(SystemCoreClock / TICKRATE_HZ);
-	uartConfig( UART_USB, 115200 );
+
 	miApp_uart_init();
 	resp = miApp_battery_init();
 	resp &= miApp_activator_init();

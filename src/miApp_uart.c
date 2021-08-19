@@ -10,14 +10,14 @@
 #include "miApp_enable.h"
 #include "sapi.h"
 
-char menu_option;
-menu_t menu_shown = none;
-bool_t bt_1 = false;
-bool_t bt_2 = false;
-bool_t bt_3 = false;
-bool_t bt_4 = false;
-#define clrscr() printf("\e[1;1H\e[2J")
-delay_t myDelay;
+static char menu_option;
+static menu_t menu_shown = none;
+static bool_t bt_1 = false;
+static bool_t bt_2 = false;
+static bool_t bt_3 = false;
+static bool_t bt_4 = false;
+static delay_t myDelay;
+
 
 /**
  * @brief Print of the main menu of battery charger.
@@ -34,6 +34,10 @@ static void miApp_uart_submenu();
  * 
  */
 static void miApp_uart_submenu2();
+
+static inline void clrscr(){
+	printf("\e[1;1H\e[2J");
+}
 
 void miApp_uart_init(){
 	delayConfig( &myDelay, 500 );
